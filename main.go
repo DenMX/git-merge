@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func sendResponse(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
   keys, ok := r.URL.Query()["a"]
   if !ok || len(keys[0]) < 1 {
       log.Println("Url Param 'a' is missing")
@@ -35,11 +35,10 @@ func sendResponse(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    http.HandleFunc("/", sendResponse)
+    http.HandleFunc("/", handler)
     log.Fatal(http.ListenAndServe(":7000", nil))
 }
 
 func sum (a, b int) int {
-  t := b + a
-  return t
+  return a + b
 }
